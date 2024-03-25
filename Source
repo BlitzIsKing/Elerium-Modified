@@ -2,6 +2,12 @@
 	Elerium UI Library (imgui)
 	by Singularity (V3rm @ King Singularity) (Discord @ Singularity#5490)
 	reworked by Blitz (Discord @ blitzisking#0)
+
+	stuff reworked / fixed:
+
+	>> Sliders are set to values instead of percentages
+	>> Draggability is fixed (on mobile)
+	>> More comming soon
 --]]
 
 local ui_options = {
@@ -939,7 +945,7 @@ end
 
 local usingSomething = false
 
-local function makeDraggable(frame)
+local function Draggable(frame)
 	local dragging
 	local dragInput
 	local dragStart
@@ -1017,7 +1023,7 @@ function library:AddWindow(title, options)
 	local Resizer = Window:WaitForChild("Resizer")
 
 	local window_data = {}
-	makeDraggable(Window)
+	Draggable(Window)
 
 	do -- Resize Window
 		local oldIcon = mouse.Icon

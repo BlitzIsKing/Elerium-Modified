@@ -1075,6 +1075,7 @@ function library:AddWindow(title, options)
 				end)
 			end
 		end)
+		task.wait()
 		UIS.InputEnded:Connect(function(inputObject)
 			if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
 				Held = false
@@ -1371,6 +1372,7 @@ function library:AddWindow(title, options)
 									end)
 								end
 							end)
+							task.wait()
 							UIS.InputEnded:Connect(function(inputObject)
 								if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
 									Held = false
@@ -1646,6 +1648,7 @@ function library:AddWindow(title, options)
 									end)
 								end
 							end)
+							task.wait()
 							UIS.InputEnded:Connect(function(inputObject)
 								if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
 									Held = false

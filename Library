@@ -812,6 +812,7 @@ Windows.Size = UDim2.new(1, 20, 1, -20)
 --[[ Script ]]--
 local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
 
 local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 
@@ -947,7 +948,7 @@ local usingSomething = false
 
 task.wait()
 
-local function Draggable(frame)
+local function makeDraggable(frame)
 	local dragging
 	local dragInput
 	local dragStart
@@ -1025,7 +1026,7 @@ function library:AddWindow(title, options)
 	local Resizer = Window:WaitForChild("Resizer")
 
 	local window_data = {}
-	Draggable(Window)
+	makeDraggable(Window)
 
 	do -- Resize Window
 		local oldIcon = mouse.Icon
@@ -1075,7 +1076,6 @@ function library:AddWindow(title, options)
 				end)
 			end
 		end)
-		task.wait()
 		UIS.InputEnded:Connect(function(inputObject)
 			if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
 				Held = false
@@ -1336,7 +1336,10 @@ function library:AddWindow(title, options)
 									spawn(function() -- Loop check
 										if Entered and not slider_options.readonly then
 											while Held and (not dropdown_open) do
-												usingSomething = true
+												if usingSomething == false then
+													usingSomething = true
+												end
+												
 												local mouse_location = gMouse()
 												local x = (slider.AbsoluteSize.X - (slider.AbsoluteSize.X - ((mouse_location.X - slider.AbsolutePosition.X)) + 1)) / slider.AbsoluteSize.X
 
@@ -1366,13 +1369,11 @@ function library:AddWindow(title, options)
 
 												RunService.Heartbeat:Wait()
 											end
-											task.wait()
 											usingSomething = false
 										end
 									end)
 								end
 							end)
-							task.wait()
 							UIS.InputEnded:Connect(function(inputObject)
 								if inputObject.UserInputType == Enum.UserInputType.MouseButton1 or inputObject.UserInputType == Enum.UserInputType.Touch then
 									Held = false
@@ -1648,7 +1649,6 @@ function library:AddWindow(title, options)
 									end)
 								end
 							end)
-							task.wait()
 							UIS.InputEnded:Connect(function(inputObject)
 								if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
 									Held = false

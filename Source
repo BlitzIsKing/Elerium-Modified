@@ -945,6 +945,8 @@ end
 
 local usingSomething = false
 
+task.wait()
+
 local function Draggable(frame)
 	local dragging
 	local dragInput
@@ -1363,6 +1365,7 @@ function library:AddWindow(title, options)
 
 												RunService.Heartbeat:Wait()
 											end
+											task.wait()
 											usingSomething = false
 										end
 									end)
